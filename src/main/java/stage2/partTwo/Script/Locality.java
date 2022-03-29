@@ -262,6 +262,13 @@ public class Locality extends Operation implements OperationTable {
         System.out.println("Введите ID населенного пункта который необходимо удалить:");
         long id = scan.nextLong();
 
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM STREETS WHERE IDLOCALITY = " + id);
+        while(resultSet.next()){
+            System.out.println(resultSet.getString("ID"));
+            stat.execute("DELETE FROM STREETS WHERE ID = " + resultSet.getString("ID"));
+        }
+
         stat.execute("DELETE FROM LOCALITY WHERE ID = " + id);
         System.out.println("Новый список:");
         showAll();
