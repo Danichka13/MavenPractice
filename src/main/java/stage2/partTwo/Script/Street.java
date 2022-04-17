@@ -205,16 +205,6 @@ public class Street extends Operation implements OperationTable {
         return count;
     }
 
-    public int getIdLocality(String nameLoc) throws SQLException {
-        int count = 0;
-        ResultSet resultSet = stat.executeQuery("SELECT * FROM LOCALITY WHERE NAME = '" + nameLoc + "'");
-
-        while (resultSet.next()) {
-            count++;
-        }
-        return count;
-    }
-
     public long getIDIfManyLocalities(int count, String nameLoc) throws SQLException {
         long id;
         ResultSet resultSet = stat.executeQuery("SELECT ID FROM LOCALITY WHERE NAME = '" + nameLoc + "'");
